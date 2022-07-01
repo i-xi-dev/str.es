@@ -1,6 +1,6 @@
 //
 
-import { Integer } from "https://raw.githubusercontent.com/i-xi-dev/int.es/1.0.0/mod.ts"; //TODO import_mapにうつす（今はdeno docで読めない）
+import { Integer } from "i-xi-dev/int";
 
 type int = number;
 
