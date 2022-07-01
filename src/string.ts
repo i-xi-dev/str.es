@@ -19,7 +19,7 @@ namespace StringUtils {
     if (pattern.length <= 0) {
       return false;
     }
-    return (new RegExp(`^[${pattern}]*$`, "u")).test(input);
+    return (new RegExp(`^${pattern}*$`, "u")).test(input);
   }
 
   export function contains(input: string, pattern: string): boolean {
@@ -32,7 +32,7 @@ namespace StringUtils {
     if (pattern.length <= 0) {
       return false;
     }
-    return (new RegExp(`[${pattern}]`, "u")).test(input);
+    return (new RegExp(`${pattern}`, "u")).test(input);
   }
 
   export function startsWith(input: string, pattern: string): boolean {
@@ -45,7 +45,7 @@ namespace StringUtils {
     if (pattern.length <= 0) {
       return false;
     }
-    return (new RegExp(`^[${pattern}]`, "u")).test(input);
+    return (new RegExp(`^${pattern}`, "u")).test(input);
   }
 
   export function endsWith(input: string, pattern: string): boolean {
@@ -58,23 +58,18 @@ namespace StringUtils {
     if (pattern.length <= 0) {
       return false;
     }
-    return (new RegExp(`[${pattern}]$`, "u")).test(input);
+    return (new RegExp(`${pattern}$`, "u")).test(input);
   }
 
-  export function collectStart(
-    input: string,
-    pattern: string,
-    negative = false,
-  ): string {
+  export function collectStart(input: string, pattern: string): string {
     if (typeof input !== "string") {
       throw new TypeError("input");
     }
     if (isNonEmptyString(pattern) !== true) {
       return "";
     }
-    const results =
-      (new RegExp(`^[${(negative === true) ? "^" : ""}${pattern}]+`, "u"))
-        .exec(input);
+    const results = (new RegExp(`^${pattern}+`, "u"))
+      .exec(input);
     if (results === null) {
       return "";
     }
@@ -89,7 +84,7 @@ namespace StringUtils {
       return input;
     }
     return input.replace(
-      new RegExp(`(?:^[${pattern}]+|[${pattern}]+$)`, "gu"),
+      new RegExp(`(?:^${pattern}+|${pattern}+$)`, "gu"),
       "",
     );
   }
@@ -101,7 +96,7 @@ namespace StringUtils {
     if (isNonEmptyString(pattern) !== true) {
       return input;
     }
-    return input.replace(new RegExp(`^[${pattern}]+`, "u"), "");
+    return input.replace(new RegExp(`^${pattern}+`, "u"), "");
   }
 
   export function trimEnd(input: string, pattern: string): string {
@@ -111,7 +106,7 @@ namespace StringUtils {
     if (isNonEmptyString(pattern) !== true) {
       return input;
     }
-    return input.replace(new RegExp(`[${pattern}]+$`, "u"), "");
+    return input.replace(new RegExp(`${pattern}+$`, "u"), "");
   }
 
   export function* segment(
@@ -134,10 +129,11 @@ namespace StringUtils {
 
     for (let i = 0; i < input.length; i = i + charCount) {
       const s = input.substring(i, i + charCount);
-      yield (s.length === charCount) ? s : s.padEnd(charCount, paddingChar);
+      yield ((s.length === charCount) || (typeof paddingChar !== "string"))
+        ? s
+        : s.padEnd(charCount, paddingChar);
     }
   }
-
 }
 Object.freeze(StringUtils);
 

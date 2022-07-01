@@ -28,7 +28,7 @@ namespace Rune {
       throw new TypeError("input");
     }
     if (Integer.isPositiveInteger(runeCount) !== true) {
-      throw new TypeError("charCount");
+      throw new TypeError("runeCount");
     }
     if ((typeof paddingRune !== "string") && (paddingRune !== undefined)) {
       throw new TypeError("paddingRune");
@@ -40,10 +40,11 @@ namespace Rune {
     const runes = [...input];
     for (let i = 0; i < runes.length; i = i + runeCount) {
       const s = runes.slice(i, i + runeCount).join("");
-      yield (s.length === runeCount) ? s : s.padEnd(runeCount, paddingRune);
+      yield ((s.length === runeCount) || (typeof paddingRune !== "string"))
+        ? s
+        : s.padEnd(runeCount, paddingRune);
     }
   }
-
 }
 Object.freeze(Rune);
 
