@@ -1,5 +1,5 @@
 import { assertStrictEquals, assertThrows } from "std/testing/asserts";
-import { Rune } from "../src/rune.ts";
+import { Rune } from "../mod.ts";
 
 Deno.test("Rune.isRune(string)", () => {
   assertStrictEquals(Rune.isRune(""), false);

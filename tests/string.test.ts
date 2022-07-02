@@ -1,5 +1,5 @@
 import { assertStrictEquals, assertThrows } from "std/testing/asserts";
-import { StringUtils } from "../src/string.ts";
+import { StringUtils } from "../mod.ts";
 
 Deno.test("StringUtils.isNonEmptyString(string)", () => {
   assertStrictEquals(StringUtils.isNonEmptyString(""), false);
