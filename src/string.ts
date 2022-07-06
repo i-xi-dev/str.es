@@ -19,7 +19,7 @@ namespace StringUtils {
     if (pattern.length <= 0) {
       return false;
     }
-    return (new RegExp(`^${pattern}*$`, "u")).test(input);
+    return (new RegExp(`^${pattern}$`, "u")).test(input);
   }
 
   export function contains(input: string, pattern: string): boolean {
@@ -68,7 +68,7 @@ namespace StringUtils {
     if (isNonEmptyString(pattern) !== true) {
       return "";
     }
-    const results = (new RegExp(`^${pattern}+`, "u"))
+    const results = (new RegExp(`^${pattern}`, "u"))
       .exec(input);
     if (results === null) {
       return "";
@@ -84,7 +84,7 @@ namespace StringUtils {
       return input;
     }
     return input.replace(
-      new RegExp(`(?:^${pattern}+|${pattern}+$)`, "gu"),
+      new RegExp(`(?:^${pattern}|${pattern}$)`, "gu"),
       "",
     );
   }
@@ -96,7 +96,7 @@ namespace StringUtils {
     if (isNonEmptyString(pattern) !== true) {
       return input;
     }
-    return input.replace(new RegExp(`^${pattern}+`, "u"), "");
+    return input.replace(new RegExp(`^${pattern}`, "u"), "");
   }
 
   export function trimEnd(input: string, pattern: string): string {
@@ -106,7 +106,7 @@ namespace StringUtils {
     if (isNonEmptyString(pattern) !== true) {
       return input;
     }
-    return input.replace(new RegExp(`${pattern}+$`, "u"), "");
+    return input.replace(new RegExp(`${pattern}$`, "u"), "");
   }
 
   export function* segment(
