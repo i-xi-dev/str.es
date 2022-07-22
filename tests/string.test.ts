@@ -83,7 +83,10 @@ Deno.test("StringUtils.startsWith(string, string)", () => {
   );
   assertStrictEquals(StringUtils.startsWith("az", "[\\u{41}\\u{5A}]+"), false);
   assertStrictEquals(StringUtils.startsWith("AZ", "[\\u{41}\\u{5A}]+"), true);
-  assertStrictEquals(StringUtils.startsWith("azAZ", "[\\u{41}\\u{5A}]+"), false);
+  assertStrictEquals(
+    StringUtils.startsWith("azAZ", "[\\u{41}\\u{5A}]+"),
+    false,
+  );
 
   assertStrictEquals(StringUtils.startsWith("x x", HTTP_TAB_OR_SPACE), false);
   assertStrictEquals(StringUtils.startsWith(" x", HTTP_TAB_OR_SPACE), true);
@@ -183,7 +186,10 @@ Deno.test("StringUtils.trimStart(string, string)", () => {
   );
   assertStrictEquals(StringUtils.trimStart("az", "[\\u{41}\\u{5A}]+"), "az");
   assertStrictEquals(StringUtils.trimStart("AZ", "[\\u{41}\\u{5A}]+"), "");
-  assertStrictEquals(StringUtils.trimStart("azAZ", "[\\u{41}\\u{5A}]+"), "azAZ");
+  assertStrictEquals(
+    StringUtils.trimStart("azAZ", "[\\u{41}\\u{5A}]+"),
+    "azAZ",
+  );
 
   assertStrictEquals(StringUtils.trimStart("x x", HTTP_TAB_OR_SPACE), "x x");
   assertStrictEquals(StringUtils.trimStart(" x", HTTP_TAB_OR_SPACE), "x");
